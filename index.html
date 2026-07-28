@@ -846,6 +846,14 @@
           document.getElementById('rankingScreen').style.display = 'none';
         });
       }
+      const viewRankingBtn = document.getElementById('viewRankingBtn');
+      const viewRankingBtnGameOver = document.getElementById('viewRankingBtnGameOver');
+      if (viewRankingBtn) {
+        viewRankingBtn.addEventListener('click', showRanking);
+      }
+      if (viewRankingBtnGameOver) {
+        viewRankingBtnGameOver.addEventListener('click', showRanking);
+      }
       if (window.elementSdk) {
         window.elementSdk.init({
           defaultConfig,
