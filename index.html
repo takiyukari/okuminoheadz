@@ -798,13 +798,21 @@
             listEl.innerHTML = '<p class="text-center text-gray-400">まだ記録がありません</p>';
             return;
           }
-          listEl.innerHTML = data.ranking.map((r, i) => `
-            <div class="flex justify-between items-center py-2 border-b border-gray-700">
-              <span class="font-bold text-yellow-400 w-8">${i + 1}</span>
-              <span class="flex-1 text-left px-2">${escapeHtml(r.player_name)}</span>
-              <span class="font-mono">${r.score.toLocaleString()}</span>
-            </div>
-          `).join('');
+          listEl.innerHTML = data.ranking.map((r, i) => {
+            const rank = i + 1;
+            let rankDisplay = rank;
+            if (rank === 1) rankDisplay = '👑';
+            else if (rank === 2) rankDisplay = '🥈';
+            else if (rank === 3) rankDisplay = '🥉';
+
+            return `
+              <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                <span class="font-bold text-yellow-400 w-8 text-lg">${rankDisplay}</span>
+                <span class="flex-1 text-left px-2">${escapeHtml(r.player_name)}</span>
+                <span class="font-mono">${r.score.toLocaleString()}</span>
+              </div>
+            `;
+          }).join('');
         } catch (e) {
           listEl.innerHTML = '<p class="text-center text-red-400">読み込みに失敗しました</p>';
         }
